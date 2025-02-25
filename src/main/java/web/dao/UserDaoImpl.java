@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(int id, User user) {
-        em.merge(new User(user.getName(), user.getUsername(), user.getPassword(), user.getEmail()));
+        em.merge(new User(id, user.getName(), user.getUsername(), user.getPassword(), user.getEmail()));
     }
 
     @Override
@@ -42,7 +42,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-
         em.persist(user);
     }
 }

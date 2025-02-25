@@ -27,7 +27,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String username, String password, String email) {
+    public User(int id, String name, String username, String password, String email) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -72,15 +73,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }
