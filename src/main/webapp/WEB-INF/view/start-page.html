@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Page</title>
+</head>
+<body>
+<table border="1" style="width:300px">
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="user,iterationStatus : ${allUsers}">
+        <th th:text="${iterationStatus.count}"></th>
+        <td th:text="${user.getName()}">user</td>
+        <td th:text="${user.getUsername()}">user</td>
+        <td th:text="${user.getPassword()}">user</td>
+        <td th:text="${user.getEmail()}">user</td>
+        <td>
+            <a href="/update">Update</a>
+            <br>
+            <a href="/delete">Delete</a>
+        </td>
+    </tr>
+</table>
+<br>
+<a href="/new">Create new user</a>
+</body>
+</html>
