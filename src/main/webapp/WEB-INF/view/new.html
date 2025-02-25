@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update person</title>
+    <title>New person</title>
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/users/update}" th:object="${user}">
-    <label for="id">Enter id: </label>
-    <input type="text" th:field="*{id}" id="id">
+<form th:method="POST" th:action="@{/add}" th:object="${user}">
+
+    <input type="hidden" th:field="*{id}" id="id">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>

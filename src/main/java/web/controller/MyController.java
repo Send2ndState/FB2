@@ -8,7 +8,7 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/")
 public class MyController {
 
     private final UserService userService;
@@ -20,14 +20,14 @@ public class MyController {
 
     @GetMapping
     public String startPage (Model model) {
-        model.addAttribute("allUsers", userService.getAllUsers());
-        return "start-page";
+        model.addAttribute("users", userService.getAllUsers());
+        return "start";
     }
 
     @GetMapping("/new")
     public String addNewUser (Model model) {
         model.addAttribute("user", new User());
-        return "new-user";
+        return "new";
     }
     @PostMapping("/add")
     public String create (@ModelAttribute("user") User user) {
@@ -38,7 +38,7 @@ public class MyController {
     @GetMapping("/edit")
     public String updateUser (@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "edit-user";
+        return "edit";
     }
 
     @PostMapping("/update")
