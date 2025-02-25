@@ -8,42 +8,48 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class MyController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public MyController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping
     public String startPage (Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
         return "start-page";
     }
 
-    @GetMapping(value = "/new")
+    @GetMapping("/new")
     public String addNewUser (Model model) {
         model.addAttribute("user", new User());
         return "new-user";
     }
-    @PostMapping(value = "/")
-    public String create (@ModelAttribute("user") User user, Model model) {
+    @PostMapping("/add")
+    public String create (@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
 
-    @GetMapping(value = "/edit")
+    @GetMapping("/edit")
     public String updateUser (@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit-user";
     }
 
-    @PatchMapping(value = "/")
-    public String update (@RequestParam("id") int id, Model model) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
+    @PostMapping("/update")
+    public String update (@RequestParam("id") int id, @ModelAttribute("user") User user) {
+        userService.updateUser(id,user);
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete")
+    public String delete (@RequestParam("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 }

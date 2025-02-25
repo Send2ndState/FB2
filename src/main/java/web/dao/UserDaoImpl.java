@@ -1,10 +1,9 @@
 package web.dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import java.util.List;
@@ -13,36 +12,32 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private EntityManager em;
+    private final EntityManagerFactory entityManagerFactory;
     @Autowired
-    public UserDaoImpl(EntityManager em) {
-        this.em = em;
+    public UserDaoImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+        em = entityManagerFactory.createEntityManager();
     }
 
     @Override
     public List<User> getAllUsers() {
-
         return em.createQuery("from User", User.class).getResultList();
     }
 
     @Override
     public User getUserById(int id) {
-        return em.createQuery("from User where id = :id", User.class).setParameter("id", id).getSingleResult();
+        return em.find(User.class, id);
+    }
+
+
+    @Override
+    public void updateUser(int id, User user) {
+        em.merge(new User(user.getName(), user.getUsername(), user.getPassword(), user.getEmail()));
     }
 
     @Override
-    public User addUser(User user) {
-
-        return null;
-    }
-
-    @Override
-    public User updateUser(User user) {
-        return null;
-    }
-
-    @Override
-    public User deleteUser(User user) {
-        return null;
+    public void deleteUser(int id) {
+        em.remove(getUserById(id));
     }
 
     @Override
