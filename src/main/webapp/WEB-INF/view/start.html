@@ -23,20 +23,21 @@
         <td th:text="${user.password}">user</td>
         <td th:text="${user.email}">user</td>
         <td>
-            <form method="get" th:action="@{/edit}" th:object="${user}">
+            <form method="get" th:action="@{/edit}">
                 <input type="hidden" name="id" th:value="${user.id}">
-                <input class="update" type="submit" value="Update">
+                <input type="submit" value="Update">
             </form>
-            <form method="post" th:action="@{/delete}" th:object="${id}">
+            <form method="post" th:action="@{/delete}">
                 <input type="hidden" name="id" th:value="${user.id}">
-                <input class="delete" type="submit" value="Delete">
+                <input type="submit" value="Delete">
             </form>
         </td>
     </tr>
 </table>
 <br>
 <form method="get" th:action="@{/new}">
-    <input class="add" type="submit" value="Create new user">
+    <input type="submit" value="Create new user">
 </form>
+
 </body>
 </html>

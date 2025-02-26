@@ -19,36 +19,37 @@ public class MyController {
     }
 
     @GetMapping
-    public String startPage (Model model) {
+    public String startPage(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "start";
     }
 
     @GetMapping("/new")
-    public String addNewUser (Model model) {
+    public String addNewUser(Model model) {
         model.addAttribute("user", new User());
         return "new";
     }
-    @PostMapping("/add")
-    public String create (@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/";
-    }
 
     @GetMapping("/edit")
-    public String updateUser (@RequestParam("id") int id, Model model) {
+    public String updateUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
+    @PostMapping("/add")
+    public String create(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/";
+    }
+
     @PostMapping("/update")
-    public String update (@RequestParam("id") int id, @ModelAttribute("user") User user) {
-        userService.updateUser(id,user);
+    public String update(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/";
     }
 
     @PostMapping("/delete")
-    public String delete (@RequestParam("id") int id) {
+    public String delete(@RequestParam("id") int id) {
         userService.deleteUser(id);
         return "redirect:/";
     }

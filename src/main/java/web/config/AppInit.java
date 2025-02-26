@@ -9,15 +9,13 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return null;
     }
 
-
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
                 WebConfig.class,
-                PersistenceJPAConfig.class
+                HibernateConfig.class
         };
     }
-
 
     @Override
     protected String[] getServletMappings() {

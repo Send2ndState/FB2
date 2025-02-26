@@ -21,11 +21,11 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan("web")
-public class PersistenceJPAConfig {
+public class HibernateConfig {
 
     private final Environment env;
 
-    public PersistenceJPAConfig(Environment env) {
+    public HibernateConfig(Environment env) {
         this.env = env;
     }
 
