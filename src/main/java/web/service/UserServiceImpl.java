@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public User getUserById(int id) {
         return userDao.getUserById(id);
     }
